@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceFlow | Premium Currency Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="description" content="Experience real-time currency conversion with FinanceFlow. Accurate, fast, and beautifully designed.">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <header>
+                <h1>FinanceFlow</h1>
+                <p class="subtitle">Global Real-Time Exchange Rates</p>
+            </header>
+
+            <div class="form-body">
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" placeholder="Enter amount..." value="1.00" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="from-currency">From</label>
+                    <select id="from-currency">
+                        {% for curr in currencies %}
+                            <option value="{{ curr }}" {% if curr == 'USD' %}selected{% endif %}>{{ curr }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="swap-btn">
+                    <button id="swap-btn" title="Swap Currencies">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label for="to-currency">To</label>
+                    <select id="to-currency">
+                        {% for curr in currencies %}
+                            <option value="{{ curr }}" {% if curr == 'EUR' %}selected{% endif %}>{{ curr }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button class="convert-btn" id="convert-btn">
+                    <span id="btn-text">Convert Now</span>
+                    <div class="loader" id="loader"></div>
+                </button>
+            </div>
+
+            <div class="result-area" id="result-area">
+                <div class="result-main" id="result-main">0.00 EUR</div>
+                <div class="exchange-rate" id="exchange-rate">1 USD = 0.92 EUR</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
